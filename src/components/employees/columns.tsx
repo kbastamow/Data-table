@@ -124,7 +124,7 @@ export const columns: ColumnDef<Employee>[] = [
   },
   {
     id: "actions",
-    cell: ({ row }) => {
+    cell: ({ row, table }) => {
       const employee = row.original;
       return (
         <DropdownMenu>
@@ -147,7 +147,8 @@ export const columns: ColumnDef<Employee>[] = [
             <DropdownMenuSeparator />
             <DropdownMenuItem>View employee</DropdownMenuItem>
             <DropdownMenuItem>Edit</DropdownMenuItem>
-            <DropdownMenuItem>Delete</DropdownMenuItem>
+            <DropdownMenuItem
+            >Delete</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );

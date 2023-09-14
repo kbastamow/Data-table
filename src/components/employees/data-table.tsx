@@ -5,8 +5,8 @@ import {
   ColumnFiltersState,
   flexRender,
   getCoreRowModel,
-  getFacetedRowModel, 
-  getFacetedUniqueValues, 
+  getFacetedRowModel,
+  getFacetedUniqueValues,
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
@@ -73,7 +73,6 @@ export function DataTable<TData, TValue>({
     },
     //pagination:
     getPaginationRowModel: getPaginationRowModel(),
-    
 
     //filters
     onColumnFiltersChange: setColumnFilters,
@@ -90,9 +89,15 @@ export function DataTable<TData, TValue>({
     initialState: {
       pagination: { pageSize: 5 },
     },
+
+    //This can be added to insert custom functions, accessible :table.options.meta.methodName
+    meta: {
+      myOwnMethod: () => {
+        console.log("Custom method")
+      },
+    }
   });
 
-  console.log(table)
   //Used to show reset button
   const isFiltered = table.getState().columnFilters.length > 0;
 
@@ -117,7 +122,7 @@ export function DataTable<TData, TValue>({
             )}
           </div>
           <div>
-          {table.getColumn("status") && (
+            {table.getColumn("status") && (
               <DataTableFacetedFilter
                 column={table.getColumn("status")}
                 title="Status"
@@ -126,20 +131,23 @@ export function DataTable<TData, TValue>({
             )}
           </div>
 
-
-            {isFiltered && (
-              <Button
-                variant="ghost"
-                onClick={() => table.resetColumnFilters()}
-                className="w-40 p-2"
-              >
-                Clear filters
-              </Button>
-            )}
+          {isFiltered && (
+            <Button
+              variant="ghost"
+              onClick={() => table.resetColumnFilters()}
+              className="w-40 p-2"
+            >
+              Clear filters
+            </Button>
+          )}
         </div>
         {/* Removes checkbox but nothing else */}
         <Button
-          onClick={() => {table.resetRowSelection(), table.resetColumnFilters(), table.resetColumnVisibility()}}
+          onClick={() => {
+            table.resetRowSelection(),
+              table.resetColumnFilters(),
+              table.resetColumnVisibility();
+          }}
           variant="outline"
           className="border-red-800 text-red-800"
         >
@@ -175,13 +183,7 @@ export function DataTable<TData, TValue>({
         </DropdownMenuContent>
       </DropdownMenu>
 
-      {/* Information about selected rows */}
-      <div className="flex-1 text-sm text-right text-muted-foreground">
-        {table.getFilteredSelectedRowModel().rows.length} of{" "}
-        {table.getFilteredRowModel().rows.length} row(s) selected.
-      </div>
-
-      <div className="border rounded-md">
+      <div className="border rounded-md mt-3">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (

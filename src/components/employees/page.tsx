@@ -8,6 +8,13 @@ async function getData(): Promise<Employee[]> {
   // Fetch data from your API here and return it. 
   return employeeData // Simply returning fake data
 }
+
+// async function deleteData(id: string): Promise<Employee[]> {
+//   // Delete from api.
+//   const index = employeeData.findIndex((value) => value.id === id) 
+//   employeeData.splice(index, 1)
+//   return employeeData // Simply returning fake data
+// }
  
 export default function EmployeePage() {
     const [data, setData] = useState<Employee[]>([])
@@ -34,10 +41,21 @@ export default function EmployeePage() {
         return <div>Loading...</div>;
       }
     
+//  async function deleteRow(id:string) {
+//   console.log("delete this row")
+//     try {
+//       const result: Employee[] = await deleteData(id);
+//       setData(result);
+//     } catch (error) {
+//       // Handle error
+//       console.error('Error deleting data:', error);
+//     } 
+//   }
  
+
   return (
     <div className="container mx-auto py-10">
-      <DataTable columns={columns} data={data} />
+      <DataTable columns={columns} data={data}/>
     </div>
   )
 }

@@ -36,6 +36,7 @@ import { Input } from "../ui/input";
 import { DataTableFacetedFilter } from "../reusable/faceted-filter";
 import { getDropDownValues } from "@/lib/utils";
 import { DataTablePagination } from "../reusable/pagination-controls";
+import { Separator } from "../ui/separator";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -143,7 +144,7 @@ export function DataTable<TData, TValue>({
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="outline" className="ml-auto">
-            Columns
+            Select columns
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
@@ -207,6 +208,7 @@ export function DataTable<TData, TValue>({
                         )}
                       </TableCell>
                     ))}
+                    <Separator orientation="vertical" />
                   </TableRow>
                 ))
               )

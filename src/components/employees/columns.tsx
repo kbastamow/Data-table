@@ -42,7 +42,7 @@ export const columns: ColumnDef<Employee>[] = [
     accessorKey: "name",
     header: ({ column }) => {
       return (
-        <div className="flex justify-between text-left display ">
+        <div className="flex justify-between text-left py-2">
           Name
           <HiArrowsUpDown
             className="w-4 h-4 ml-2 cursor-pointer"
@@ -62,11 +62,31 @@ export const columns: ColumnDef<Employee>[] = [
   },
   {
     accessorKey: "department",
-    header: "Department",
+    header: ({ column }) => {
+      return (
+        <div className="flex justify-between text-left py-2">
+          Department
+          <HiArrowsUpDown
+            className="w-4 h-4 ml-2 cursor-pointer"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          />
+        </div>
+      );
+    },
   },
   {
     accessorKey: "location",
-    header: "Location",
+    header: ({ column }) => {
+      return (
+        <div className="flex justify-between text-left py-2 ">
+          Location
+          <HiArrowsUpDown
+            className="w-4 h-4 ml-2 cursor-pointer"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          />
+        </div>
+      );
+    },
     cell: ({ row }) => (
       <div className="w-[80px]">{row.getValue("location")}</div>
     ),
@@ -76,7 +96,17 @@ export const columns: ColumnDef<Employee>[] = [
   },
   {
     accessorKey: "status",
-    header: "Status",
+    header: ({ column }) => {
+      return (
+        <div className="flex justify-between text-left py-2">
+          Status
+          <HiArrowsUpDown
+            className="w-4 h-4 ml-2 cursor-pointer"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          />
+        </div>
+      );
+    },
      cell: ({ row }) => {
       const { status } = row.original;
       const colors = {
@@ -86,7 +116,7 @@ export const columns: ColumnDef<Employee>[] = [
         left: "bg-red-500",
       };
      
-      return (<Badge variant="outline" className={`${colors[status]} text-white`}>{status}</Badge>);
+      return (<Badge variant="outline" className={`${colors[status]} text-white justify-center w-3/4`}>{status}</Badge>);
     },
     filterFn: (row, id, value) => {
       return value.includes(row.getValue(id));

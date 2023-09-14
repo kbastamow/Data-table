@@ -10,7 +10,7 @@ async function getData(): Promise<Employee[]> {
 }
  
 export default function EmployeePage() {
-    const [data, setData] = useState([]);
+    const [data, setData] = useState<Employee[]>([])
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {

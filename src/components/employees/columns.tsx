@@ -15,6 +15,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Checkbox } from "../ui/checkbox";
+import { Toast } from "../reusable/Toast";
 
 
 export const columns: ColumnDef<Employee>[] = [
@@ -76,7 +77,6 @@ export const columns: ColumnDef<Employee>[] = [
     id: "actions",
     cell: ({ row }) => {
       const employee = row.original
- 
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -89,11 +89,12 @@ export const columns: ColumnDef<Employee>[] = [
             <DropdownMenuItem
               onClick={() => navigator.clipboard.writeText(employee.id)}
             >
-              Copy employee id
+              <Toast buttonText={"Copy employee id"} description={"ID copied to clipboard"}></Toast>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>View employee</DropdownMenuItem>
-            <DropdownMenuItem>View more details</DropdownMenuItem>
+            <DropdownMenuItem>Edit</DropdownMenuItem>
+            <DropdownMenuItem>Delete</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       )

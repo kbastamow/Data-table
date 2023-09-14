@@ -4,5 +4,5 @@ export interface Employee {
     department: string
     email: string
     location: string
-    status: "active" | "vacation" | "on leave" | "ex"
+    status: "active" | "vacation" | "on leave" | "left"
   }

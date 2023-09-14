@@ -36,6 +36,7 @@ import { Input } from "../ui/input";
 import { DataTableFacetedFilter } from "../reusable/faceted-filter";
 import { getDropDownValues } from "@/lib/utils";
 import { DataTablePagination } from "../reusable/pagination-controls";
+import { Toast } from "../reusable/Toast";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -215,24 +216,6 @@ export function DataTable<TData, TValue>({
       <div className="pt-4 flex justify-end">
         <DataTablePagination table={table}></DataTablePagination>
       </div>
-      {/* <div className="flex items-center justify-end py-4 space-x-2">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
-        >
-          Previous
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
-        >
-          Next
-        </Button>
-      </div> */}
     </div>
   );
 }

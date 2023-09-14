@@ -1,5 +1,6 @@
 import './App.css'
 import EmployeePage from './components/employees/page'
+import { Toaster } from './components/ui/toaster'
 
 function App() {
 
@@ -7,6 +8,7 @@ function App() {
   return (
     <>
         <EmployeePage></EmployeePage>
+        <Toaster />
     </>
   )
 }

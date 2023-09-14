@@ -32,7 +32,7 @@ export const employeeData: Employee[] = [
       department: "Marketing",
       email: "alice.brown@example.com",
       location: "Los Angeles",
-      status: "ex",
+      status: "left",
     },
     {
       id: "5",
@@ -64,7 +64,7 @@ export const employeeData: Employee[] = [
       department: "Finance",
       email: "olivia.hernandez@example.com",
       location: "Denver",
-      status: "ex",
+      status: "left",
     },
     {
       id: "9",

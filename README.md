@@ -5,7 +5,7 @@ This is a data table built with **Shadcn** UI components and **Tanstack Table**.
 - [Tanstack-table](https://tanstack.com/table/v8)
 - [Shadcn-ui](https://ui.shadcn.com/docs) 
 
-The table has been built following a the excellent tutorial and examples found on Shadcn documentation, and extended.
+The table has been built following the excellent tutorial and examples found on Shadcn documentation, and extended.
 
 ![screenshot](./src/assets/screenshot-table.png)
 
@@ -13,11 +13,10 @@ The table has been built following a the excellent tutorial and examples found o
 
 The project is built on **React-Vite** and uses **TypeScript**.
 
-- Install React Vite:
+- Install React Vite and follow instructions create the project:
 ```
 $ npm create vite@latest
 ```
-and follow instructions create the project.
 
 - Install Shadcn and Tailwind: [Follow link for instructions](https://ui.shadcn.com/docs/installation/vite)
 
@@ -28,7 +27,7 @@ $ npx shadcn-ui@latest add button
 ```
 ## Data 📜
 
-The table show a fictional list of employees.
+The table shows a fictional list of employees.
 
 Data is simply fake data in an array in the project itself, rather than fetched from a real database.
 
@@ -47,7 +46,7 @@ These are features of the table:
 ### TABLE:
 
 - **Sorting:** Selected columns can be sorted ascending or descending.
-- **Row select:** First column's checbox selects the row.
+- **Row select:** First column's checkbox selects the row.
 - **Extra actions dropdown:** Each row displays extra actions at the end of the row. Only the first one is currently functional, and it copies the employee ID to clipboard and displays a toast-message.
 
 ### FOOTER:
@@ -63,7 +62,7 @@ Column visibility:
 Faceted-filter dropdown:  
 <img src="./src/assets/value-filter.png"  height="200">
 ***
-Filter tags and clear button:
+Filter tags and clear button:  
 <img src="./src/assets/value-filter-tags.png"  height="100">
 ***
 More actions:  
@@ -86,9 +85,9 @@ Reusable components:
 
 ## Next steps 🪜
 
-- Abstract the table component into a reusable one, and split it into smaller components.
+➡️ Abstract the table component into a reusable one, and split it into smaller components.
 
-- Introduce context to avoid passing table data as prop -> Easier to handle data manipulation methods as they may happen in different components. 
+➡️ Introduce context to avoid passing table data as prop -> Easier to handle data manipulation methods as they may happen in different components. 
 
 ## Tech
 

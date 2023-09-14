@@ -99,7 +99,7 @@ export function DataTable<TData, TValue>({
               table.getColumn("name")?.setFilterValue(event.target.value)}
             className="max-w-sm"
           />
-          <div>
+          <div className="flex-col">
             {table.getColumn("location") && (
               <DataTableFacetedFilter
                 column={table.getColumn("location")}

@@ -5,6 +5,8 @@ import {
   ColumnFiltersState,
   flexRender,
   getCoreRowModel,
+  getFacetedRowModel, //And HERE
+  getFacetedUniqueValues, //HERE
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
@@ -31,10 +33,13 @@ import {
 
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
+import { DataTableFacetedFilter } from "../reusable/faceted-filter";
+import { getDropDownValues } from "@/lib/utils";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  // table: TanstackTable<TData>; //HERE
 }
 
 export function DataTable<TData, TValue>({
@@ -68,6 +73,10 @@ export function DataTable<TData, TValue>({
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
 
+    //Faceted filters:
+    getFacetedUniqueValues: getFacetedUniqueValues(),
+    getFacetedRowModel: getFacetedRowModel(),
+
     //Visibility:
     onColumnVisibilityChange: setColumnVisibility,
 
@@ -76,18 +85,47 @@ export function DataTable<TData, TValue>({
       pagination: { pageSize: 5 },
     },
   });
+  //Used to show reset button
+  const isFiltered = table.getState().columnFilters.length > 0;
 
   return (
     <div>
-      <div className="flex items-center py-4">
-        <Input
-          placeholder="Filter by name"
-          value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn("name")?.setFilterValue(event.target.value)}
-          className="max-w-sm"
-        />
+      <div className="flex justify-between py-4">
+        <div className="flex gap-3">
+          <Input
+            placeholder="Filter by name"
+            value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
+            onChange={(event) =>
+              table.getColumn("name")?.setFilterValue(event.target.value)}
+            className="max-w-sm"
+          />
+          <div>
+            {table.getColumn("location") && (
+              <DataTableFacetedFilter
+                column={table.getColumn("location")}
+                title="Location"
+                options={getDropDownValues(data, "location")}
+              />
+            )}
+          </div>
+            {isFiltered && (
+              <Button
+                variant="ghost"
+                onClick={() => table.resetColumnFilters()}
+                className="w-40 p-2"
+              >
+                Clear filters
+              </Button>
+            )}
+        </div>
+        {/* Removes checkbox but nothing else */}
+        <Button
+          onClick={() => table.reset()}
+        >
+          Reset table
+        </Button>
       </div>
+
       {/* Column selection button */}
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
@@ -115,7 +153,7 @@ export function DataTable<TData, TValue>({
             })}
         </DropdownMenuContent>
       </DropdownMenu>
-      
+
       {/* Information about selected rows */}
       <div className="flex-1 text-sm text-right text-muted-foreground">
         {table.getFilteredSelectedRowModel().rows.length} of{" "}

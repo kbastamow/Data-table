@@ -62,6 +62,11 @@ export const columns: ColumnDef<Employee>[] = [
   {
     accessorKey: "location",
     header: "Location",
+    cell: ({ row }) => <div className="w-[80px]">{row.getValue("location")}</div>,
+    filterFn: (row, id, value) => {
+      return value.includes(row.getValue(id))
+    },
+    
   },
   {
     accessorKey: "status",

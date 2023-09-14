@@ -59,23 +59,21 @@ export function DataTableFacetedFilter<TData, TValue>({
           } */}
         </Button>
       </PopoverTrigger>
-      {selectedValues?.size > 0 && 
-              <div className="space-x-1 lg:flex pt-2">
-                {(
-                    options
-                      .filter((option) => selectedValues.has(option.value))
-                      .map((option) => (
-                        <Badge
-                          variant="secondary"
-                          key={option.value}
-                          className="px-1 font-normal rounded-sm"
-                        >
-                          {option.label}
-                        </Badge>
-                      ))
-                  )  }
-              </div>
-          }
+      {selectedValues?.size > 0 && (
+        <div className="space-x-1 lg:flex pt-2">
+          {options
+            .filter((option) => selectedValues.has(option.value))
+            .map((option) => (
+              <Badge
+                variant="secondary"
+                key={option.value}
+                className="px-1 font-normal rounded-sm"
+              >
+                {option.label}
+              </Badge>
+            ))}
+        </div>
+      )}
       <PopoverContent className="w-[200px] p-0" align="start">
         <Command>
           <CommandInput placeholder={title} />
@@ -95,7 +93,7 @@ export function DataTableFacetedFilter<TData, TValue>({
                       }
                       const filterValues = Array.from(selectedValues);
                       column?.setFilterValue(
-                        filterValues.length ? filterValues : undefined,
+                        filterValues.length ? filterValues : undefined
                       );
                     }}
                   >

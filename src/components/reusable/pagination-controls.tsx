@@ -31,19 +31,23 @@ export function DataTablePagination<TData>({
           <div className="flex-col">
             {/* Stop rows per page count if there is no more data */}
             <FiChevronUp
-              onClick={(!table.getCanNextPage()) ? null : () => {
-                (table.getState().pagination.pageSize <= 1)
-                  ? table.setPageSize(5)
-                  : table.setPageSize(table.getState().pagination.pageSize + 5);
-              }}
-            >
-            </FiChevronUp>
+              onClick={
+                !table.getCanNextPage()
+                  ? null
+                  : () => {
+                      table.getState().pagination.pageSize <= 1
+                        ? table.setPageSize(5)
+                        : table.setPageSize(
+                            table.getState().pagination.pageSize + 5
+                          );
+                    }
+              }
+            ></FiChevronUp>
             <FiChevronDown
               onClick={() => {
                 table.setPageSize(table.getState().pagination.pageSize - 5);
               }}
-            >
-            </FiChevronDown>
+            ></FiChevronDown>
           </div>
           {}
         </div>

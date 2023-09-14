@@ -107,7 +107,7 @@ export const columns: ColumnDef<Employee>[] = [
         </div>
       );
     },
-     cell: ({ row }) => {
+    cell: ({ row }) => {
       const { status } = row.original;
       const colors = {
         active: "bg-green-500",
@@ -115,8 +115,15 @@ export const columns: ColumnDef<Employee>[] = [
         "other leave": "bg-yellow-500",
         left: "bg-red-500",
       };
-     
-      return (<Badge variant="outline" className={`${colors[status]} text-white justify-center w-3/4`}>{status}</Badge>);
+
+      return (
+        <Badge
+          variant="outline"
+          className={`${colors[status]} text-white justify-center w-3/4`}
+        >
+          {status}
+        </Badge>
+      );
     },
     filterFn: (row, id, value) => {
       return value.includes(row.getValue(id));
@@ -141,14 +148,12 @@ export const columns: ColumnDef<Employee>[] = [
               <Toast
                 buttonText={"Copy employee id"}
                 description={"ID copied to clipboard"}
-              >
-              </Toast>
+              ></Toast>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>View employee</DropdownMenuItem>
             <DropdownMenuItem>Edit</DropdownMenuItem>
-            <DropdownMenuItem
-            >Delete</DropdownMenuItem>
+            <DropdownMenuItem>Delete</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );

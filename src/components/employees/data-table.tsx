@@ -60,6 +60,8 @@ export function DataTable<TData, TValue>({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    //row selection
+    onRowSelectionChange: setRowSelection,
     //sorting:
     onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
@@ -67,6 +69,7 @@ export function DataTable<TData, TValue>({
       sorting,
       columnFilters,
       columnVisibility,
+      rowSelection,
     },
     //pagination:
     getPaginationRowModel: getPaginationRowModel(),
@@ -88,6 +91,8 @@ export function DataTable<TData, TValue>({
       pagination: { pageSize: 5 },
     },
   });
+
+  console.log(table)
   //Used to show reset button
   const isFiltered = table.getState().columnFilters.length > 0;
 
@@ -134,7 +139,9 @@ export function DataTable<TData, TValue>({
         </div>
         {/* Removes checkbox but nothing else */}
         <Button
-          onClick={() => table.reset()}
+          onClick={() => {table.resetRowSelection(), table.resetColumnFilters(), table.resetColumnVisibility()}}
+          variant="outline"
+          className="border-red-800 text-red-800"
         >
           Reset table
         </Button>

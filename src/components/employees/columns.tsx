@@ -3,8 +3,8 @@ import { Employee } from "../../types/employee";
 import { HiArrowsUpDown } from "react-icons/hi2";
 import { RiMore2Fill } from "react-icons/ri";
 // import { MoreHorizontal } from "lucide-react"
- 
-import { Button } from "@/components/ui/button"
+
+import { Button } from "@/components/ui/button";
 
 import {
   DropdownMenu,
@@ -13,10 +13,10 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu";
 import { Checkbox } from "../ui/checkbox";
 import { Toast } from "../reusable/Toast";
-
+import { Badge } from "../ui/badge";
 
 export const columns: ColumnDef<Employee>[] = [
   {
@@ -41,15 +41,19 @@ export const columns: ColumnDef<Employee>[] = [
   {
     accessorKey: "name",
     header: ({ column }) => {
-      return   (
-        <div className="flex justify-between text-left display ">Name
-            <HiArrowsUpDown className="w-4 h-4 ml-2 cursor-pointer" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}/>
+      return (
+        <div className="flex justify-between text-left display ">
+          Name
+          <HiArrowsUpDown
+            className="w-4 h-4 ml-2 cursor-pointer"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          />
         </div>
-      )
+      );
     },
-    cell: ({row}) => {
-        const { name } = row.original;
-        return <div className="font-medium text-left ">{name}</div>
+    cell: ({ row }) => {
+      const { name } = row.original;
+      return <div className="font-medium text-left ">{name}</div>;
     },
   },
   {
@@ -63,25 +67,40 @@ export const columns: ColumnDef<Employee>[] = [
   {
     accessorKey: "location",
     header: "Location",
-    cell: ({ row }) => <div className="w-[80px]">{row.getValue("location")}</div>,
+    cell: ({ row }) => (
+      <div className="w-[80px]">{row.getValue("location")}</div>
+    ),
     filterFn: (row, id, value) => {
-      return value.includes(row.getValue(id))
+      return value.includes(row.getValue(id));
     },
-    
   },
   {
     accessorKey: "status",
     header: "Status",
+     cell: ({ row }) => {
+      const { status } = row.original;
+      const colors = {
+        active: "bg-green-500",
+        vacation: "bg-yellow-500",
+        "other leave": "bg-yellow-500",
+        left: "bg-red-500",
+      };
+     
+      return (<Badge variant="outline" className={`${colors[status]} text-white`}>{status}</Badge>);
+    },
+    filterFn: (row, id, value) => {
+      return value.includes(row.getValue(id));
+    },
   },
   {
     id: "actions",
     cell: ({ row }) => {
-      const employee = row.original
+      const employee = row.original;
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="w-8 h-8 p-0">
-           <RiMore2Fill></RiMore2Fill>
+              <RiMore2Fill></RiMore2Fill>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
@@ -89,7 +108,11 @@ export const columns: ColumnDef<Employee>[] = [
             <DropdownMenuItem
               onClick={() => navigator.clipboard.writeText(employee.id)}
             >
-              <Toast buttonText={"Copy employee id"} description={"ID copied to clipboard"}></Toast>
+              <Toast
+                buttonText={"Copy employee id"}
+                description={"ID copied to clipboard"}
+              >
+              </Toast>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>View employee</DropdownMenuItem>
@@ -97,9 +120,8 @@ export const columns: ColumnDef<Employee>[] = [
             <DropdownMenuItem>Delete</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-      )
+      );
     },
   },
   // ...
-]
-
+];

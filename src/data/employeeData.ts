@@ -24,7 +24,7 @@ export const employeeData: Employee[] = [
       department: "Finance",
       email: "bob.johnson@example.com",
       location: "Chicago",
-      status: "on leave",
+      status: "other leave",
     },
     {
       id: "4",
@@ -56,7 +56,7 @@ export const employeeData: Employee[] = [
       department: "IT",
       email: "michael.lee@example.com",
       location: "Seattle",
-      status: "on leave",
+      status: "other leave",
     },
     {
       id: "8",

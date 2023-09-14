@@ -1,13 +1,13 @@
 
 import { useToast } from "@/components/ui/use-toast"
+import { ToastProps } from "../ui/toast"
  
-interface ToastProps {
+interface ToastInterface extends ToastProps{
     buttonText: string,
     description: string
 }
 
-
-export function Toast({buttonText, description} : ToastProps) {
+export function Toast({buttonText, description} : ToastInterface) {
   const { toast } = useToast()
   return (
     <div

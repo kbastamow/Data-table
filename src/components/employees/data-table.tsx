@@ -36,7 +36,6 @@ import { Input } from "../ui/input";
 import { DataTableFacetedFilter } from "../reusable/faceted-filter";
 import { getDropDownValues } from "@/lib/utils";
 import { DataTablePagination } from "../reusable/pagination-controls";
-import { Toast } from "../reusable/Toast";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -111,6 +110,17 @@ export function DataTable<TData, TValue>({
               />
             )}
           </div>
+          <div>
+          {table.getColumn("status") && (
+              <DataTableFacetedFilter
+                column={table.getColumn("status")}
+                title="Status"
+                options={getDropDownValues(data, "status")}
+              />
+            )}
+          </div>
+
+
             {isFiltered && (
               <Button
                 variant="ghost"

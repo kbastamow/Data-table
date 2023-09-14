@@ -5,8 +5,8 @@ import {
   ColumnFiltersState,
   flexRender,
   getCoreRowModel,
-  getFacetedRowModel, //And HERE
-  getFacetedUniqueValues, //HERE
+  getFacetedRowModel, 
+  getFacetedUniqueValues, 
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
@@ -35,6 +35,7 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { DataTableFacetedFilter } from "../reusable/faceted-filter";
 import { getDropDownValues } from "@/lib/utils";
+import { DataTablePagination } from "../reusable/pagination-controls";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -68,6 +69,7 @@ export function DataTable<TData, TValue>({
     },
     //pagination:
     getPaginationRowModel: getPaginationRowModel(),
+    
 
     //filters
     onColumnFiltersChange: setColumnFilters,
@@ -210,7 +212,10 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      <div className="flex items-center justify-end py-4 space-x-2">
+      <div className="pt-4 flex justify-end">
+        <DataTablePagination table={table}></DataTablePagination>
+      </div>
+      {/* <div className="flex items-center justify-end py-4 space-x-2">
         <Button
           variant="outline"
           size="sm"
@@ -227,7 +232,7 @@ export function DataTable<TData, TValue>({
         >
           Next
         </Button>
-      </div>
+      </div> */}
     </div>
   );
 }

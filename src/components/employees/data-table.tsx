@@ -3,6 +3,7 @@ import { useState } from "react";
 import {
   ColumnDef,
   ColumnFiltersState,
+  ColumnOrderState, //HERE
   flexRender,
   getCoreRowModel,
   getFacetedRowModel,
@@ -19,6 +20,7 @@ import {
   Table,
   TableBody,
   TableCell,
+  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
@@ -53,6 +55,7 @@ export function DataTable<TData, TValue>({
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = useState({});
+  const [columnOrder, setColumnOrder] = useState<ColumnOrderState>([])
 
   const table = useReactTable({
     data,
@@ -68,9 +71,12 @@ export function DataTable<TData, TValue>({
       columnFilters,
       columnVisibility,
       rowSelection,
+      columnOrder,
     },
     //pagination:
     getPaginationRowModel: getPaginationRowModel(),
+//Order of columns
+    onColumnOrderChange: setColumnOrder,
 
     //filters
     onColumnFiltersChange: setColumnFilters,
@@ -98,7 +104,7 @@ export function DataTable<TData, TValue>({
 
   //Used to show reset button
   const isFiltered = table.getState().columnFilters.length > 0;
-
+ 
   return (
     <div>
       <div className="flex justify-between py-4">
@@ -140,15 +146,16 @@ export function DataTable<TData, TValue>({
             </Button>
           )}
         </div>
-        {/* Removes checkbox but nothing else */}
+
         <Button
           onClick={() => {
             table.resetRowSelection(),
               table.resetColumnFilters(),
               table.resetColumnVisibility();
+              table.resetColumnOrder()
           }}
           variant="outline"
-          className="border-red-800 text-red-800"
+          className="text-red-800 border-red-800"
         >
           Reset table
         </Button>
@@ -180,7 +187,7 @@ export function DataTable<TData, TValue>({
         </DropdownMenuContent>
       </DropdownMenu>
 
-      <div className="border rounded-md mt-3">
+      <div className="mt-3 border rounded-md">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -204,6 +211,7 @@ export function DataTable<TData, TValue>({
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
+                className=""
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
                 >
@@ -229,9 +237,27 @@ export function DataTable<TData, TValue>({
               </TableRow>
             )}
           </TableBody>
+
+          <TableFooter>
+          {table.getFooterGroups().map(footerGroup => (
+            <TableRow key={footerGroup.id}>
+              {footerGroup.headers.map(header => (
+                <TableCell key={header.id}>
+                  {header.isPlaceholder
+                    ? null
+                    : flexRender(
+                        header.column.columnDef.footer,
+                        header.getContext()
+                    )}
+                    </TableCell>
+              ))}
+              </TableRow>
+          ))}
+          </TableFooter>
+
         </Table>
       </div>
-      <div className="pt-4 flex justify-end">
+      <div className="flex justify-end pt-4">
         <DataTablePagination table={table}></DataTablePagination>
       </div>
     </div>

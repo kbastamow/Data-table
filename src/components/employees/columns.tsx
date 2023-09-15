@@ -71,7 +71,6 @@ export const columns: ColumnDef<Employee>[] = [
               )}
           >
           </HiOutlineArrowLeftCircle>
-          {/* <span className="text-xs">Move</span> */}
           <HiOutlineArrowRightCircle
             className="w-4 h-4 mr-2 cursor-pointer"
             onClick={() =>
@@ -98,7 +97,6 @@ export const columns: ColumnDef<Employee>[] = [
               )}
           >
           </HiOutlineArrowLeftCircle>
-          {/* <span className="text-xs">Move</span> */}
           <HiOutlineArrowRightCircle
             className="w-4 h-4 mr-2 cursor-pointer"
             onClick={() =>
@@ -135,7 +133,6 @@ export const columns: ColumnDef<Employee>[] = [
               )}
           >
           </HiOutlineArrowLeftCircle>
-          {/* <span className="text-xs">Move</span> */}
           <HiOutlineArrowRightCircle
             className="w-4 h-4 mr-2 cursor-pointer"
             onClick={() =>
@@ -176,7 +173,6 @@ export const columns: ColumnDef<Employee>[] = [
               )}
           >
           </HiOutlineArrowLeftCircle>
-          {/* <span className="text-xs">Move</span> */}
           <HiOutlineArrowRightCircle
             className="w-4 h-4 mr-2 cursor-pointer"
             onClick={() =>
@@ -228,13 +224,12 @@ export const columns: ColumnDef<Employee>[] = [
         <div className="flex flex-row gap-4">
           <HiOutlineArrowLeftCircle
             className="w-4 h-4 ml-2 cursor-pointer"
-            onClick={() => {() =>
+            onClick={() =>
               table.setColumnOrder(
                 moveColumnsUp(table.getAllLeafColumns(), column.id),
-              )}}
+              )}
           >
           </HiOutlineArrowLeftCircle>
-          {/* <span className="text-xs">Move</span> */}
           <HiOutlineArrowRightCircle
             className="w-4 h-4 mr-2 cursor-pointer"
             onClick={() =>

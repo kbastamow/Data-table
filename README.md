@@ -48,6 +48,7 @@ These are features of the table:
 - **Sorting:** Selected columns can be sorted ascending or descending.
 - **Row select:** First column's checkbox selects the row.
 - **Extra actions dropdown:** Each row displays extra actions at the end of the row. Only the first one is currently functional, and it copies the employee ID to clipboard and displays a toast-message.
+- **Column reorder:** The last row features arrows that move columns right or left.
 
 ### FOOTER:
 
@@ -67,7 +68,9 @@ Filter tags and clear button:
 ***
 More actions:  
 <img src="./src/assets/actions.png"  height="200">
-
+***  
+Footer:  
+![screenshot](./src/assets/footer.png)
 
 ## Structure 🧬
 
